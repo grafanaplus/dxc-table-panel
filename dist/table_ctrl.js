@@ -110,12 +110,14 @@ System.register(['angular', 'lodash', 'jquery', 'moment', 'app/core/utils/file_e
           type: 'date',
           pattern: 'Time',
           alias: 'Time',
-          dateFormat: 'YYYY-MM-DD HH:mm:ss'
+          dateFormat: 'YYYY-MM-DD HH:mm:ss',
+          headerColor: "rgba(51, 181, 229, 1)"
         }, {
           unit: 'short',
           type: 'number',
           alias: '',
           decimals: 2,
+          headerColor: "rgba(51, 181, 229, 1)",
           colors: ["rgba(245, 54, 54, 0.9)", "rgba(237, 129, 40, 0.89)", "rgba(50, 172, 45, 0.97)"],
           colorMode: null,
           pattern: '/.*/',
@@ -158,8 +160,8 @@ System.register(['angular', 'lodash', 'jquery', 'moment', 'app/core/utils/file_e
         _createClass(TableCtrl, [{
           key: 'onInitEditMode',
           value: function onInitEditMode() {
-            this.addEditorTab('Options', tablePanelEditor, 2);
-            this.addEditorTab('Column Styles', columnOptionsTab, 3);
+            this.addEditorTab('表格设置', tablePanelEditor, 2);
+            this.addEditorTab('列样式', columnOptionsTab, 3);
           }
         }, {
           key: 'onInitPanelActions',

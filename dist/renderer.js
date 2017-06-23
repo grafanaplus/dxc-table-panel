@@ -168,6 +168,30 @@ System.register(['lodash', 'moment', 'app/core/utils/kbn'], function (_export, _
               };
             }
 
+            if (column.style.type === 'percentage') {
+              //　过滤
+              var percentageReg = /%/;
+              var reg = /(\D*)(\d+(\.\d+)?\%)(\D*)/g;
+              return function (v) {
+                if (v === null || v === void 0 || v === undefined) {
+                  return '';
+                }
+                if (_.isArray(v)) {
+                  v = v.join('<br>');
+                }
+                if (percentageReg.test(v)) {
+                  var str = '';
+                  for (var i = 0; i < v.match(reg).length; i++) {
+                    var REG = reg.exec(v);
+                    str += REG[1] + '<span class="table-panel-bar"><span style="width:' + REG[2] + '"></span></span>' + REG[2] + " " + REG[4];
+                  }
+                  return str;
+                } else {
+                  return _this.defaultCellFormatter(v, column.style);
+                }
+              };
+            }
+
             return function (value) {
               return _this.defaultCellFormatter(value, column.style);
             };
@@ -183,13 +207,17 @@ System.register(['lodash', 'moment', 'app/core/utils/kbn'], function (_export, _
             var addWidthHack = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
             value = this.formatColumnValue(columnIndex, value);
-            var style = '';
+            var style = '',
+                point = '';
             if (this.colorState.cell) {
               style = ' style="background-color:' + this.colorState.cell + ';color: white"';
               this.colorState.cell = null;
             } else if (this.colorState.value) {
               style = ' style="color:' + this.colorState.value + '"';
               this.colorState.value = null;
+            } else if (this.colorState.statePoint) {
+              point = '<span class="state-point" style="background:' + this.colorState.statePoint + '"></span>';
+              this.colorState.statePoint = null;
             }
 
             // because of the fixed table headers css only solution
@@ -207,7 +235,7 @@ System.register(['lodash', 'moment', 'app/core/utils/kbn'], function (_export, _
               this.table.columns[columnIndex].hidden = false;
             }
 
-            return '<td' + style + '>' + value + widthHack + '</td>';
+            return '<td' + style + '>' + point + value + widthHack + '</td>';
           }
         }, {
           key: 'render',

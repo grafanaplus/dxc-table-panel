@@ -68,8 +68,8 @@ System.register(['lodash', 'jquery', 'moment', 'angular', 'app/core/utils/kbn'],
           this.panelCtrl = $scope.ctrl;
           this.panel = this.panelCtrl.panel;
           this.unitFormats = kbn.getUnitFormats();
-          this.colorModes = [{ text: 'Disabled', value: null }, { text: 'Cell', value: 'cell' }, { text: 'Value', value: 'value' }, { text: 'Row', value: 'row' }];
-          this.columnTypes = [{ text: 'Number', value: 'number' }, { text: 'String', value: 'string' }, { text: 'Date', value: 'date' }, { text: 'Hidden', value: 'hidden' }];
+          this.colorModes = [{ text: '无', value: null }, { text: '单元格', value: 'cell' }, { text: '内容', value: 'value' }, { text: '行', value: 'row' }, { text: '状态点', value: 'statePoint' }];
+          this.columnTypes = [{ text: '百分百', value: 'percentage' }, { text: '数字', value: 'number' }, { text: '文字', value: 'string' }, { text: '日期', value: 'date' }, { text: '隐藏', value: 'hidden' }];
           this.fontSizes = ['80%', '90%', '100%', '110%', '120%', '130%', '150%', '160%', '180%', '200%', '220%', '250%'];
           this.dateFormats = [{ text: 'YYYY-MM-DD HH:mm:ss', value: 'YYYY-MM-DD HH:mm:ss' }, { text: 'MM/DD/YY h:mm:ss a', value: 'MM/DD/YY h:mm:ss a' }, { text: 'MMMM D, YYYY LT', value: 'MMMM D, YYYY LT' }];
 
@@ -102,6 +102,7 @@ System.register(['lodash', 'jquery', 'moment', 'angular', 'app/core/utils/kbn'],
               type: 'number',
               alias: '',
               decimals: 2,
+              headerColor: "rgba(51, 181, 229, 1)",
               colors: ["rgba(245, 54, 54, 0.9)", "rgba(237, 129, 40, 0.89)", "rgba(50, 172, 45, 0.97)"],
               colorMode: null,
               pattern: '',

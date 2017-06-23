@@ -118,6 +118,30 @@ export class TableRenderer {
         return valueFormatter(v, column.style.decimals, null);
       };
     }
+    
+    if (column.style.type === 'percentage') {
+      //　过滤
+      let percentageReg = /%/;
+      let reg = /(\D*)(\d+(\.\d+)?\%)(\D*)/g;
+      return v => {
+        if (v === null || v === void 0 || v === undefined) {
+          return '';
+        }
+        if (_.isArray(v)) {
+          v = v.join('<br>');
+        }
+        if (percentageReg.test(v)) {
+          let str = '';
+          for (let i = 0; i < v.match(reg).length; i++) {
+            let REG = reg.exec(v);
+            str += REG[1] + '<span class="table-panel-bar"><span style="width:' + REG[2] + '"></span></span>' + REG[2]+ " " + REG[4];
+          }
+          return str;
+        } else {
+          return this.defaultCellFormatter(v, column.style);
+        }
+      };
+    }
 
     return (value) => {
       return this.defaultCellFormatter(value, column.style);
@@ -130,13 +154,17 @@ export class TableRenderer {
 
   renderCell(columnIndex, value, addWidthHack = false) {
     value = this.formatColumnValue(columnIndex, value);
-    var style = '';
+    var style = '',
+        point = '';
     if (this.colorState.cell) {
       style = ' style="background-color:' + this.colorState.cell + ';color: white"';
       this.colorState.cell = null;
     } else if (this.colorState.value) {
       style = ' style="color:' + this.colorState.value + '"';
       this.colorState.value = null;
+    } else if (this.colorState.statePoint) {
+      point = '<span class="state-point" style="background:' + this.colorState.statePoint + '"></span>';
+      this.colorState.statePoint = null;
     }
 
     // because of the fixed table headers css only solution
@@ -154,7 +182,7 @@ export class TableRenderer {
       this.table.columns[columnIndex].hidden = false;
     }
 
-    return '<td' + style + '>' + value + widthHack + '</td>';
+    return '<td' + style + '>' + point + value + widthHack + '</td>';
   }
 
   render(page) {
