@@ -312,6 +312,25 @@ System.register(['angular', 'lodash', 'jquery', 'moment', 'app/core/utils/file_e
               appendPaginationControls(footerElem);
 
               rootElem.css({ 'max-height': panel.scroll ? getTableHeight() : '' });
+
+              // 获取列宽
+              var tdElem = void 0;
+
+              tdElem = elem.find('tbody tr:first-child td');
+              ctrl.widthArr = [];
+
+              tdElem.map(function (td) {
+                ctrl.widthArr.push(tdElem[td].clientWidth);
+              });
+
+              setTimeout(function () {
+                tdElem = elem.find('tbody tr:first-child td');
+                ctrl.widthArr = [];
+
+                tdElem.map(function (td) {
+                  ctrl.widthArr.push(tdElem[td].clientWidth);
+                });
+              }, 0);
             }
 
             elem.on('click', '.table-panel-page-link', switchPage);

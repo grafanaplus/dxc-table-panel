@@ -1,17 +1,16 @@
-
 <div class="edit-tab-with-sidemenu">
-	<aside class="edit-sidemenu-aside">
-		<ul class="edit-sidemenu">
+  <aside class="edit-sidemenu-aside">
+    <ul class="edit-sidemenu">
       <li ng-repeat="style in editor.panel.styles" ng-class="{active: editor.activeStyleIndex === $index}">
-        <a ng-click="editor.activeStyleIndex = $index" >{{style.pattern || 'New rule'}}</a>
+        <a ng-click="editor.activeStyleIndex = $index">{{style.pattern || 'New rule'}}</a>
       </li>
       <li>
         <a class="pointer" ng-click="editor.addColumnStyle()">
           <i class="fa fa-plus"></i>&nbsp;新样式
         </a>
       </li>
-		</ul>
-	</aside>
+    </ul>
+  </aside>
 
   <div class="edit-tab-content" ng-repeat="style in editor.panel.styles" ng-if="editor.activeStyleIndex === $index">
 
@@ -45,13 +44,14 @@
           <select class="gf-form-input" ng-model="style.type" ng-options="c.value as c.text for c in editor.columnTypes" ng-change="editor.render()"></select>
         </div>
       </div>
-      <div class="gf-form"  ng-if="style.type === 'date'">
+      <div class="gf-form" ng-if="style.type === 'date'">
         <label class="gf-form-label width-8">日期格式</label>
         <metric-segment-model property="style.dateFormat" options="editor.dateFormats" on-change="editor.render()" custom="true"></metric-segment-model>
       </div>
 
       <div ng-if="style.type === 'string'">
-        <gf-form-switch class="gf-form" label-class="width-8" ng-if="style.type === 'string'" label="过滤HTML" checked="style.sanitize" change="editor.render()"></gf-form-switch>
+        <gf-form-switch class="gf-form" label-class="width-8" ng-if="style.type === 'string'" label="过滤HTML" checked="style.sanitize"
+          change="editor.render()"></gf-form-switch>
       </div>
 
       <div ng-if="style.type === 'number'">
@@ -66,7 +66,7 @@
       </div>
     </div>
 
-    <div class="section gf-form-group"  ng-if="style.type === 'number'">
+    <div class="section gf-form-group" ng-if="style.type === 'number'">
       <h5 class="section-heading">阈值</h5>
       <div class="gf-form">
         <label class="gf-form-label width-8">阈值<tip>以逗号分隔</tip></label>
@@ -107,7 +107,7 @@
     <div class="clearfix"></div>
 
     <button class="btn btn-danger btn-small" ng-click="editor.removeColumnStyle(style)">
-      <i class="fa fa-trash"></i> Remove Rule
+      <i class="fa fa-trash"></i> 移除样式
     </button>
     <br />
     <br />

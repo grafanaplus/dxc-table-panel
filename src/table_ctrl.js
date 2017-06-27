@@ -209,6 +209,25 @@ export class TableCtrl extends MetricsPanelCtrl {
       appendPaginationControls(footerElem);
 
       rootElem.css({ 'max-height': panel.scroll ? getTableHeight() : '' });
+
+      // 获取列宽
+      let tdElem;
+      
+      tdElem = elem.find('tbody tr:first-child td');
+      ctrl.widthArr = [];
+
+      tdElem.map(td => {
+        ctrl.widthArr.push(tdElem[td].clientWidth);
+      });
+
+      setTimeout(function(){
+        tdElem = elem.find('tbody tr:first-child td');
+        ctrl.widthArr = [];
+
+        tdElem.map(td => {
+          ctrl.widthArr.push(tdElem[td].clientWidth);
+        });
+      },0);
     }
 
     elem.on('click', '.table-panel-page-link', switchPage);
