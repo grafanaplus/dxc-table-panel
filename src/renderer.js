@@ -121,8 +121,8 @@ export class TableRenderer {
     
     if (column.style.type === 'percentage') {
       //　过滤
-      let percentageReg = /%/;
-      let reg = /(\D*)(\d+(\.\d+)?\%)(\D*)/g;
+      const percentageReg = /%/;
+      const reg = /(\d+(\.\d+)?\%)([^\.\%]*[^\d\.\%])?/g;
       return v => {
         if (v === null || v === void 0 || v === undefined) {
           return '';
@@ -132,9 +132,13 @@ export class TableRenderer {
         }
         if (percentageReg.test(v)) {
           let str = '';
-          for (let i = 0; i < v.match(reg).length; i++) {
-            let REG = reg.exec(v);
-            str += REG[1] + '<span class="table-panel-bar"><span style="width:' + REG[2] + '"></span></span>' + REG[2]+ " " + REG[4];
+          let REG = [];
+          let regLength = v.match(reg).length;
+          for (let i = 0; i < regLength; i++) {
+            REG = reg.exec(v);
+            str += '<div class="table-panel-percentage"><span class="table-panel-bar"><span style="width:' + REG[1] + '"></span></span>' + REG[1];
+            str += REG[3]?' ' + REG[3]:'';
+            str += "</div>";
           }
           return str;
         } else {

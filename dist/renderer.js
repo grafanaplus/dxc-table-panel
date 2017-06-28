@@ -171,7 +171,7 @@ System.register(['lodash', 'moment', 'app/core/utils/kbn'], function (_export, _
             if (column.style.type === 'percentage') {
               //　过滤
               var percentageReg = /%/;
-              var reg = /(\D*)(\d+(\.\d+)?\%)(\D*)/g;
+              var reg = /(\d+(\.\d+)?\%)([^\.\%]*[^\d\.\%])?/g;
               return function (v) {
                 if (v === null || v === void 0 || v === undefined) {
                   return '';
@@ -181,9 +181,13 @@ System.register(['lodash', 'moment', 'app/core/utils/kbn'], function (_export, _
                 }
                 if (percentageReg.test(v)) {
                   var str = '';
-                  for (var i = 0; i < v.match(reg).length; i++) {
-                    var REG = reg.exec(v);
-                    str += REG[1] + '<span class="table-panel-bar"><span style="width:' + REG[2] + '"></span></span>' + REG[2] + " " + REG[4];
+                  var REG = [];
+                  var regLength = v.match(reg).length;
+                  for (var i = 0; i < regLength; i++) {
+                    REG = reg.exec(v);
+                    str += '<div class="table-panel-percentage"><span class="table-panel-bar"><span style="width:' + REG[1] + '"></span></span>' + REG[1];
+                    str += REG[3] ? ' ' + REG[3] : '';
+                    str += "</div>";
                   }
                   return str;
                 } else {

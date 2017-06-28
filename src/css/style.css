@@ -9,18 +9,24 @@
 }
 
 .table-panel-table-header-inner {
-    padding: .4em 1.1em;
-    font-size: 1.1em;
+    padding: .45em 1.1em;
+    font-size: 1em;
     text-align: center;
 }
 
 .table-panel-table td {
     border-color: transparent;
-    padding: .45em 1.1em;
+    padding: .4em 1em;
+    line-height: 2;
 }
 
 .table-panel-table tr:nth-child(odd) td {
     background-color: #1b1919;
+}
+
+.table-panel-percentage {
+    width: 100%;
+    text-align: left;
 }
 
 .table-panel-bar {
@@ -28,7 +34,7 @@
     margin: 0 12px;
     border-radius: 4px;
     height: 20px;
-    width: 30%;
+    width: 6em;
     overflow: hidden;
     background: #333;
     vertical-align: middle;
