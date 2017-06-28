@@ -1,22 +1,23 @@
-.table-panel-table {
+.table-panel-container {
+    padding-top: 2.6em;
     text-align: center;
 }
 
 .table-panel-header-bg {
-    height: 2.2em;
+    height: 2.6em;
     border: none;
     background: #333;
 }
 
 .table-panel-table-header-inner {
-    padding: .45em 1.1em;
-    font-size: 1em;
+    padding: .3em 1em;
+    line-height: 2;
     text-align: center;
 }
 
 .table-panel-table td {
     border-color: transparent;
-    padding: .4em 1em;
+    padding: .3em 1em;
     line-height: 2;
 }
 
