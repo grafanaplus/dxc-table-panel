@@ -302,35 +302,18 @@ System.register(['angular', 'lodash', 'jquery', 'moment', 'app/core/utils/file_e
             function renderPanel() {
               var panelElem = elem.parents('.panel');
               var rootElem = elem.find('.table-panel-scroll');
-              var tbodyElem = elem.find('tbody');
+              var tbodyTopElem = elem.find('.table-panel-table-head tbody');
+              var tbodyElem = elem.find('.table-panel-table-body tbody');
               var footerElem = elem.find('.table-panel-footer');
 
               elem.css({ 'font-size': panel.fontSize });
               panelElem.addClass('table-panel-wrapper');
 
+              appendTableRows(tbodyTopElem);
               appendTableRows(tbodyElem);
               appendPaginationControls(footerElem);
 
               rootElem.css({ 'max-height': panel.scroll ? getTableHeight() : '' });
-
-              // 获取列宽
-              var tdElem = void 0;
-
-              tdElem = elem.find('tbody tr:first-child td');
-              ctrl.widthArr = [];
-
-              tdElem.map(function (td) {
-                ctrl.widthArr.push(tdElem[td].clientWidth);
-              });
-
-              setTimeout(function () {
-                tdElem = elem.find('tbody tr:first-child td');
-                ctrl.widthArr = [];
-
-                tdElem.map(function (td) {
-                  ctrl.widthArr.push(tdElem[td].clientWidth);
-                });
-              }, 0);
             }
 
             elem.on('click', '.table-panel-page-link', switchPage);

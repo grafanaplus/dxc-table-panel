@@ -1,12 +1,11 @@
 
 <div class="table-panel-container">
-	<div class="table-panel-header-bg" ng-show="ctrl.table.rows.length"></div>
-	<div class="table-panel-scroll" ng-show="ctrl.table.rows.length">
-		<table class="table-panel-table">
+	<div class="table-panel-header-bg" ng-show="ctrl.table.rows.length">
+		<table class="table-panel-table table-panel-table-head">
 			<thead>
 				<tr>
 					<th ng-repeat="col in ctrl.table.columns" ng-hide="col.hidden">
-						<div class="table-panel-table-header-inner pointer" style="width:{{ctrl.widthArr[$index]}}px;color:{{col.style.headerColor}};" ng-click="ctrl.toggleColumnSort(col, $index)">
+						<div class="table-panel-table-header-inner pointer" style="color:{{col.style.headerColor}};" ng-click="ctrl.toggleColumnSort(col, $index)">
 							{{col.title}}
 							<span class="table-panel-table-header-controls" ng-if="col.sort">
 								<i class="fa fa-caret-down" ng-show="col.desc"></i>
@@ -16,6 +15,12 @@
 					</th>
 				</tr>
 			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+	<div class="table-panel-scroll" ng-show="ctrl.table.rows.length">
+		<table class="table-panel-table table-panel-table-body">
 			<tbody>
 			</tbody>
 		</table>
