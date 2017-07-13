@@ -1,5 +1,5 @@
 {
-  "name": "grafana-table-panel",
+  "name": "dxc-table-panel",
   "version": "1.0.0",
   "description": "Improved grafana table plugin",
   "main": "src/module.js",

@@ -18,7 +18,7 @@ System.register(['lodash', 'jquery', 'moment', 'angular', 'app/core/utils/kbn'],
     return {
       restrict: 'E',
       scope: true,
-      templateUrl: 'public/plugins/grafana-table-panel/column_options.html',
+      templateUrl: 'public/plugins/dxc-table-panel/column_options.html',
       controller: ColumnOptionsCtrl
     };
   }

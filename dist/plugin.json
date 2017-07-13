@@ -1,7 +1,7 @@
 {
   "type": "panel",
   "name": "表格",
-  "id": "grafana-table-panel",
+  "id": "dxc-table-panel",
 
   "info": {
     "description": "Improved grafana table plugin",
